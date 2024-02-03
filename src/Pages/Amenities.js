@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Amenities.css";
 import Utilities from "./Utilities";
 import TopHeader from "./TopHeader";
 import SellPopup from "./SellPopup";
 
 const Amenities = () => {
-  const [selectedTab, setSelectedTab] = useState("cycles"); // Set "Cycles" as the default tab
+  const [selectedTab, setSelectedTab] = useState(""); // Set "Cycles" as the default tab
   const [isSellPopupOpen, setSellPopupOpen] = useState(false);
+
+  useEffect(() => {
+    // This code will run when the component mounts
+    setSelectedTab('cycles');
+    // <Utilities category={selectedTab} />
+  }, []);
 
   const openSellPopup = () => {
     setSellPopupOpen(true);
@@ -31,14 +37,14 @@ const Amenities = () => {
             Cycles
           </button>
           <button
-            className={`amenities-tab ${selectedTab === "Mattresses" ? "active" : ""}`}
+            className={`amenities-tab ${selectedTab === "mattresses" ? "active" : ""}`}
             onClick={() => setSelectedTab("mattresses")}
             style={{ color: "black" }}
           >
             Mattresses
           </button>
           <button
-            className={`amenities-tab ${selectedTab === "Electronics" ? "active" : ""}`}
+            className={`amenities-tab ${selectedTab === "electronics" ? "active" : ""}`}
             onClick={() => setSelectedTab("electronics")}
             style={{ color: "black" }}
           >
@@ -46,7 +52,7 @@ const Amenities = () => {
           </button>
           <button
             className={`amenities-tab ${selectedTab === "Others" ? "active" : ""}`}
-            onClick={() => setSelectedTab("others")}
+            onClick={() => setSelectedTab("Others")}
             style={{ color: "black" }}
           >
             Others

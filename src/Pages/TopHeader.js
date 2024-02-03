@@ -55,7 +55,26 @@ const TopHeader = () => {
     <div className="top-header">
       <div className="profile-icon" style={profileIconStyles}>
         <img src={ProfileIcon} alt="Profile" style={profileIconStyles} />
+        <Link
+            to="/Amenities"
+            
+          >
+            amenities
+            </Link>
+            <Link
+          to="/coupons"
+          
+        >
+          coupons
+          </Link>
+          <Link
+          to="/events"
+         
+        >
+          events
+          </Link>
       </div>
+      
       <Link to="/profile">
         <div className="extra-profile-icon" style={extraProfileIconStyles}>
           <i className="fa fa-user" aria-hidden="true"></i>
@@ -63,9 +82,9 @@ const TopHeader = () => {
       </Link>
       {/* <Link to="/" exact render={() => <StudentDetails />} /> */}
       {/* <Route path="/profile" component={Profile} /> */}
-      <div className="search-bar" style={searchBarStyles}>
+      {/* <div className="search-bar" style={searchBarStyles}>
         <input type="text" placeholder="        Search..." style={{ width: '100%', height: '75%', borderRadius: '25px' }} />
-      </div>
+      </div> */}
 
       <div style={textStyle}>
         IITDh

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./EventForm.css";
+import "./Eventform.css";
 
 const EventForm = ({ isOpen, onClose }) => {
     const [rollNo, setRollNo] = useState('');

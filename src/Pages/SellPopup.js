@@ -1,19 +1,40 @@
 import React, { useState } from "react";
+import {useSelector} from "react-redux"; 
+import {URL} from "../constants/actionTypes.js"
 import "./SellPopup.css";
-
+import axios from 'axios';
 const SellPopup = ({ isOpen, onClose }) => {
-    const [rollNo, setRollNo] = useState('');
+    // const [rollNo, setRollNo] = useState('');
     const [category, setCategory] = useState('');
     const [itemName, setItemName] = useState('');
     const [image, setImage] = useState('');
-    const [phNum, setPhNum] = useState('');
+    const [cost, setCost] =useState("");
     const [registered, setRegistered] = useState(false);
-
+    var roll_no=useSelector((state) => state.userHandler.roll_no);
+    console.log(roll_no,"roll dfs");
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Add your registration logic here
-        // For demonstration purposes, just set 'registered' to true
-        setRegistered(true);
+        const fetchData = async()=>{
+            try{
+                console.log(roll_no,"roll number")
+                var sellItemBody={
+                    roll_number: roll_no,
+                    category:category,
+                    item_name:itemName,
+                    cost: cost,
+                    images:image
+                };
+                
+                const response = await axios.post(`${URL}/sellitem`, sellItemBody)
+                onClose=false;
+                setRegistered(true);
+            }
+            catch(error){
+                console.error('Error fetching data:', error);
+        
+               }        
+        }
+       fetchData();
     };
 
     return (
@@ -22,12 +43,12 @@ const SellPopup = ({ isOpen, onClose }) => {
                 <span className="sell-popup-close" onClick={onClose}>
                     &times;
                 </span>
-                <form onSubmit={handleFormSubmit}>
-                    <label>
+                <form >
+                    {/* <label>
                         Roll No:
                         <input type="text" value={rollNo} onChange={(e) => setRollNo(e.target.value)} />
                     </label>
-                    <br />
+                    <br /> */}
                     <label>
                         Category:
                         <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
@@ -44,11 +65,11 @@ const SellPopup = ({ isOpen, onClose }) => {
                     </label>
                     <br />
                     <label>
-                        Phone Number:
-                        <input type="text" value={phNum} onChange={(e) => setPhNum(e.target.value)} />
+                        Cost:
+                        <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} />
                     </label>
                     <br />
-                    <button type="submit">Submit</button>
+                    <button type="submit" onClick={handleFormSubmit} >Submit</button>
                 </form>
             </div>
         </div>
